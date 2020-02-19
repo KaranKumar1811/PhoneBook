@@ -7,6 +7,7 @@ import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -35,6 +36,11 @@ public class Contacts extends AppCompatActivity {
 
     }
 
+
+    public void loaddata(){
+        ContactHolder holder;
+
+    }
 
     class Adapter extends BaseAdapter
     {
@@ -92,6 +98,21 @@ public class Contacts extends AppCompatActivity {
             holder.lastname.setId(position);
             holder.phoneNo.setId(position);
             holder.address.setId(position);
+
+try{
+            c.moveToFirst();
+
+            while (c!=null && c.getCount()>0 ){
+                Log.d("ABC",c.getString(c.getColumnIndex("firstName")));
+                holder.firstname.setText(c.getString(c.getColumnIndex("firstName") ));
+                Log.d("ABC","Move To Next");
+                c.moveToNext();
+            }
+}
+catch (Exception e){
+    e.printStackTrace();
+}
+
 
             return convertView;
 
