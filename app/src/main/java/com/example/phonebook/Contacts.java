@@ -3,7 +3,9 @@ package com.example.phonebook;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.app.Activity;
+import android.app.AlertDialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
@@ -12,6 +14,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.BaseAdapter;
 import android.widget.ListView;
 import android.widget.SearchView;
@@ -35,11 +38,51 @@ public class Contacts extends AppCompatActivity {
         contact_List = findViewById(R.id.contact_list);
         contact_List.setAdapter(adapter);
 
+
+
+
+        contact_List.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
+            @Override
+            public boolean onItemLongClick(AdapterView<?> parent, View view, int position, final long id) {
+                Log.d("list ID : ",String.valueOf(id));
+                final AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(view.getContext());
+                alertDialogBuilder.setMessage("Are you sure, You wanted to make decision");
+                alertDialogBuilder.setPositiveButton("yes",
+                        new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface arg0, int arg1) {
+                                myDatabase.delete("person3","id = "+ String.valueOf(id),null);
+                                adapter.notifyDataSetChanged();
+                                 loadData();
+                            }
+                        });
+                alertDialogBuilder.setNegativeButton("Cancel",new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        dialog.cancel();
+                    }
+                });
+                AlertDialog alertDialog = alertDialogBuilder.create();
+                alertDialog.show();
+                return true;
+            }
+        });
+        adapter.notifyDataSetChanged();
+
+
+
     }
 
 
-    public void loaddata(){
-        ContactHolder holder;
+
+
+
+
+
+
+    public void loadData(){
+        contact_List.getEmptyView();
+        contact_List.getAdapter();
 
     }
 
@@ -117,6 +160,9 @@ public class Contacts extends AppCompatActivity {
 
 
                        if(position==c.getInt(idIndex)-1) {
+                           Log.d("ID :",String.valueOf(c.getInt(idIndex)));
+                           Log.d("Name :",c.getString(fnameIndex));
+                           Log.d("Pos :",String.valueOf(position));
                            holder.firstname.setText(c.getString(fnameIndex));
                            holder.lastname.setText(c.getString(lastNameIndex));
                            holder.address.setText(c.getString(address));
