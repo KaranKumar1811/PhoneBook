@@ -3,6 +3,7 @@ package com.example.phonebook;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.app.Activity;
+import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
@@ -87,6 +88,9 @@ public class Contacts extends AppCompatActivity {
                 holder.phoneNo = convertView.findViewById(R.id.contact);
                 holder.address = convertView.findViewById(R.id.address);
 
+
+
+
                 convertView.setTag(holder);
 
             }
@@ -94,29 +98,43 @@ public class Contacts extends AppCompatActivity {
             {
                 holder = (ContactHolder) convertView.getTag();
             }
-            holder.firstname.setId(position);
-            holder.lastname.setId(position);
-            holder.phoneNo.setId(position);
-            holder.address.setId(position);
 
-try{
-            c.moveToFirst();
 
-            while (c!=null && c.getCount()>0 ){
-                Log.d("ABC",c.getString(c.getColumnIndex("firstName")));
-                holder.firstname.setText(c.getString(c.getColumnIndex("firstName") ));
-                Log.d("ABC","Move To Next");
-                c.moveToNext();
+        try{
+
+            int fnameIndex = c.getColumnIndex("firstName");
+            int lastNameIndex = c.getColumnIndex("lastName");
+            int phone = c.getColumnIndex("phoneNumber");
+            int address = c.getColumnIndex("address");
+            int idIndex = c.getColumnIndex("id");
+
+                    c.moveToFirst();
+
+                    while (c!=null && c.getCount()>0 ){
+                        Log.d("ID :",String.valueOf(c.getInt(idIndex)));
+                        Log.d("Name :",c.getString(fnameIndex));
+                        Log.d("Pos :",String.valueOf(position));
+
+
+                       if(position==c.getInt(idIndex)-1) {
+                           holder.firstname.setText(c.getString(fnameIndex));
+                           holder.lastname.setText(c.getString(lastNameIndex));
+                           holder.address.setText(c.getString(address));
+                           holder.phoneNo.setText(c.getString(phone));
+                       }
+
+                        c.moveToNext();
+                    }
             }
-}
-catch (Exception e){
-    e.printStackTrace();
-}
+            catch (Exception e){
+                e.printStackTrace();
+            }
 
 
-            return convertView;
+                    return convertView;
 
         }
+
     }
 
     class ContactHolder{
