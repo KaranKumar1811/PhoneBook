@@ -32,7 +32,17 @@ public class MainActivity extends AppCompatActivity {
         final EditText etNumber = (EditText)findViewById(R.id.editText3);
         final EditText etAddress = (EditText)findViewById(R.id.editText5);
         Button savebutton = (Button)findViewById(R.id.saveButton);
+        Button contact_List = (Button)findViewById(R.id.list);
 
+
+
+        contact_List.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent k = new Intent(MainActivity.this, Contacts.class);
+                startActivity(k);
+            }
+        });
 
 
         savebutton.setOnClickListener(new View.OnClickListener() {

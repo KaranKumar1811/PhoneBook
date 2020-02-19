@@ -30,7 +30,7 @@
                     android:layout_height="wrap_content"
                     android:layout_margin="10dp"
                     android:gravity="center"
-                    android:text="Add Person"
+                    android:text="Add Contact"
                     android:textSize="30sp"
                     android:textStyle="bold|italic" />
             </LinearLayout>
@@ -146,6 +146,13 @@
                 android:layout_height="wrap_content"
                 android:layout_margin="10dp"
                 android:text="Save Information" />
+            <Button
+                android:id="@+id/list"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="10dp"
+                android:text="Contact List" />
+
         </LinearLayout>
     </ScrollView>
 

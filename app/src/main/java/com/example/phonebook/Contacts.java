@@ -6,10 +6,12 @@ import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 import android.os.Bundle;
+import android.util.AttributeSet;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -53,7 +55,7 @@ public class Contacts extends AppCompatActivity {
                             public void onClick(DialogInterface arg0, int arg1) {
                                 myDatabase.delete("person3","id = "+ String.valueOf(id),null);
                                 adapter.notifyDataSetChanged();
-                                 loadData();
+                                finish();
                             }
                         });
                 alertDialogBuilder.setNegativeButton("Cancel",new DialogInterface.OnClickListener() {
@@ -74,15 +76,10 @@ public class Contacts extends AppCompatActivity {
     }
 
 
-
-
-
-
-
-
     public void loadData(){
-        contact_List.getEmptyView();
-        contact_List.getAdapter();
+
+//        Intent k = new Intent(this, Contacts.class);
+//        startActivity(k);
 
     }
 
