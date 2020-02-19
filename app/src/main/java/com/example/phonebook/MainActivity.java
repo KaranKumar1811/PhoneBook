@@ -1,15 +1,23 @@
 package com.example.phonebook;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.RecyclerView;
 
+import android.app.Activity;
 import android.content.Intent;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.LayoutInflater;
 import android.view.View;
+import android.view.ViewGroup;
+import android.widget.BaseAdapter;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.TextView;
+
+import java.util.List;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -25,6 +33,8 @@ public class MainActivity extends AppCompatActivity {
         final EditText etAddress = (EditText)findViewById(R.id.editText5);
         Button savebutton = (Button)findViewById(R.id.saveButton);
 
+
+
         savebutton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -32,6 +42,8 @@ public class MainActivity extends AppCompatActivity {
                 last = etlastName.getText().toString();
                 Number = etNumber.getText().toString();
                 address11 = etAddress.getText().toString();
+
+
                 Log.i("first name", first);
                 if(first.isEmpty()  || last.isEmpty()  || Number.isEmpty()  || address11.isEmpty()){
                     Log.i("heloo", "heloo");
@@ -79,4 +91,8 @@ public class MainActivity extends AppCompatActivity {
 
 
     }
+
+
+
+
 }
